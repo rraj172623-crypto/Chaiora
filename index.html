@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chaiora Luxury Teas – Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120d08;--card:#1d150d;--gold:#e6b85c;--gold2:#a8802f;--text:#f4ead8;--mute:#b7a98f;--line:#3a2c1a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Mukta,system-ui,sans-serif;padding-bottom:110px}
+header{text-align:center;padding:36px 16px 20px;background:radial-gradient(circle at 50% 0,#2b1d0d,var(--bg) 70%)}
+h1{font-family:'Cormorant Garamond',serif;font-size:44px;margin:0;color:var(--gold);letter-spacing:1px}
+header p{margin:4px 0 0;color:var(--mute)}
+.tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold)}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#120d08ee;border-bottom:1px solid var(--line)}
+nav a{flex:none;color:var(--text);text-decoration:none;border:1px solid var(--gold2);border-radius:20px;padding:6px 14px;font-size:14px}
+main{max-width:720px;margin:0 auto;padding:0 14px}
+h2{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);margin:30px 0 8px;scroll-margin-top:60px}
+.item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;margin-bottom:8px}
+.ph{position:relative;flex:none;width:60px;height:60px;border-radius:10px;background:#2a1e10;display:grid;place-items:center;font-size:30px;overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.info{flex:1;min-width:0}
+.name{font-weight:600;font-size:16px}
+.sub{font-size:12.5px;color:var(--mute)}
+.price{color:var(--gold);font-weight:600}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button,.add{border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:8px;font:inherit;cursor:pointer}
+.qty button{width:30px;height:30px;font-size:18px;line-height:1}
+.add{padding:5px 14px}
+.qty span{min-width:16px;text-align:center}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+footer{text-align:center;color:var(--mute);padding:30px 16px;font-size:14px}
+footer a{color:var(--gold)}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));background:#0b0805;border-top:1px solid var(--gold2);display:none;z-index:9}
+#bar.on{display:block}
+.row{max-width:720px;margin:0 auto;display:flex;gap:10px;align-items:center}
+#who{flex:1;min-width:0;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+#go{flex:none;background:#25a244;color:#fff;border:0;border-radius:10px;padding:11px 14px;font:600 15px Mukta,sans-serif;cursor:pointer}
+#sum{max-width:720px;margin:0 auto 8px;font-size:14px;color:var(--mute)}
+#sum b{color:var(--gold)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chaiora</h1>
+  <p>Luxury Teas · Sargasan, Gandhinagar</p>
+  <div class="tag">Sip the Royalty</div>
+  <p>100% Veg</p>
+</header>
+<nav id="nav"></nav>
+<main id="menu"></main>
+<footer>Follow us <a href="https://instagram.com/ChaioraCafe" target="_blank" rel="noopener">@ChaioraCafe</a><br>Visit Chaiora Cafe and experience the royal taste.</footer>
+<div id="bar">
+  <div id="sum"></div>
+  <div class="row">
+    <input id="who" placeholder="Your name / table no." aria-label="Your name or table number">
+    <button id="go">Order on WhatsApp</button>
+  </div>
+</div>
+<script>
+var PHONE="917096287302";
+// photo: put images/<photo>.jpg in the repo. If missing, the emoji shows.
+var M=[
+["Royal Tea",[
+["Masala Chai",30,"masala-chai","☕"],["Adrak Chai",30,"adrak-chai","☕"],["Elaichi Chai",30,"elaichi-chai","☕"],["Rajwadi Chai",40,"rajwadi-chai","☕"],["Kulhad Chai",40,"kulhad-chai","🏺"],["Saffron Chai",60,"saffron-chai","☕"],["Green Tea",40,"green-tea","🍵"],["Immunity Tea",50,"immunity-tea","🍵"]]],
+["Coffee & Shakes",[
+["Hot Coffee",50,"hot-coffee","☕"],["Cold Coffee",89,"cold-coffee","🧋"],["Chocolate Coffee",109,"chocolate-coffee","🍫"],["Hazelnut Coffee",119,"hazelnut-coffee","☕"],["Caramel Coffee",119,"caramel-coffee","☕"],["Mocha Coffee",129,"mocha-coffee","☕"],["Banana Shake",109,"banana-shake","🍌"],["Oreo Shake",119,"oreo-shake","🥤"],["KitKat Shake",129,"kitkat-shake","🥤"],["Brownie Shake",149,"brownie-shake","🥤"],["Chocolate Frappe",139,"chocolate-frappe","🥤"]]],
+["Food & Snacks",[
+["Veg Sandwich",79,"veg-sandwich","🥪"],["Cheese Sandwich",109,"cheese-sandwich","🥪"],["Club Sandwich",149,"club-sandwich","🥪"],["Veg Burger",89,"veg-burger","🍔"],["Cheese Burger",119,"cheese-burger","🍔"],["French Fries",79,"french-fries","🍟"],["Peri Peri Fries",99,"peri-peri-fries","🍟"],["Masala Maggi",69,"masala-maggi","🍜"],["Cheese Maggi",99,"cheese-maggi","🍜"],["Margherita Pizza",149,"margherita-pizza","🍕"],["Farmhouse Pizza",199,"farmhouse-pizza","🍕"]]],
+["Desserts",[
+["Chocolate Waffle",119,"chocolate-waffle","🧇"],["Brownie",99,"brownie","🍫"],["Brownie with Ice Cream",149,"brownie-ice-cream","🍨"],["Chocolate Pancake",129,"chocolate-pancake","🥞"]]],
+["Special Combos",[
+["Chaiora Classic Combo",99,"classic-combo","🎁","Masala Chai + Veg Sandwich"],["Chaiora Chill Combo",149,"chill-combo","🎁","Cold Coffee + French Fries"],["Friends Combo",299,"friends-combo","🎁","2 Burgers + 2 Cold Coffee + Fries"]]]
+];
+var Q={},P={},N={};
+var menu=document.getElementById("menu"),nav=document.getElementById("nav"),h="",n="";
+M.forEach(function(c,ci){
+  n+='<a href="#c'+ci+'">'+c[0]+'</a>';
+  h+='<h2 id="c'+ci+'">'+c[0]+'</h2>';
+  c[1].forEach(function(i){
+    var k=i[2];P[k]=i[1];N[k]=i[0];
+    h+='<div class="item"><div class="ph"><span>'+i[3]+'</span><img src="images/'+k+'.jpg" alt="'+i[0]+'" loading="lazy" onerror="this.remove()"></div>'+
+    '<div class="info"><div class="name">'+i[0]+'</div>'+(i[4]?'<div class="sub">'+i[4]+'</div>':'')+'<div class="price">₹'+i[1]+'</div></div>'+
+    '<div class="qty" id="q-'+k+'"><button class="add" onclick="ch(\''+k+'\',1)">Add</button></div></div>';
+  });
+});
+menu.innerHTML=h;nav.innerHTML=n;
+function ch(k,d){
+  Q[k]=Math.max(0,(Q[k]||0)+d);
+  var e=document.getElementById("q-"+k);
+  e.innerHTML=Q[k]?'<button onclick="ch(\''+k+'\',-1)" aria-label="Remove one">−</button><span>'+Q[k]+'</span><button onclick="ch(\''+k+'\',1)" aria-label="Add one">+</button>':'<button class="add" onclick="ch(\''+k+'\',1)">Add</button>';
+  var c=0,t=0;for(var x in Q){c+=Q[x];t+=Q[x]*P[x];}
+  document.getElementById("bar").className=c?"on":"";
+  document.getElementById("sum").innerHTML=c+' item'+(c>1?'s':'')+' · <b>₹'+t+'</b>';
+}
+document.getElementById("go").onclick=function(){
+  var l=[],t=0;
+  for(var k in Q){if(Q[k]){l.push(Q[k]+" x "+N[k]+" = ₹"+Q[k]*P[k]);t+=Q[k]*P[k];}}
+  var w=document.getElementById("who").value.trim();
+  var m="Hello Chaiora, I would like to order:\n"+l.join("\n")+"\nTotal: ₹"+t+(w?"\nName/Table: "+w:"");
+  window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(m),"_blank");
+};
+</script>
+</body>
+</html>
